@@ -13,10 +13,14 @@ namespace cmyui {
 
         Score() : correct(0), incorrect(0), maxNumber(0), time(0), date(0) {}
         Score(int _correct, int _incorrect, int _maxNumber, int _time, int _date)
-            : correct(_correct), incorrect(_incorrect), maxNumber(_maxNumber), time(_time), date(_date) {
-        }
+            : correct(_correct), incorrect(_incorrect), maxNumber(_maxNumber), time(_time), date(_date) {}
 
         std::string getTimeFormatted(int input) const;
+
+        bool operator>(Score& s);
+        bool operator<(Score& s);
+        bool operator>=(Score& s);
+        bool operator<=(Score& s);
     };
 }
 

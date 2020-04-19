@@ -31,9 +31,9 @@ cmyui::Score playGame(int limit) {
 
     for (byte i = 0; i < s.maxNumber; i++) { // question loop
         std::cout << "Score: " << s.correct << " : " << s.incorrect << " (" << (s.correct + s.incorrect ? ((float)s.correct / (s.correct + s.incorrect)) * 100 : 100.0f) << "%)" << std::endl
-            << "Completion: " << s.correct + s.incorrect << " / " << s.maxNumber << " (" << (((float)s.correct + s.incorrect) / s.maxNumber) * 100 << "%)" << std::endl << std::endl
-            << "Whats " << x[i] << " * " << y[i] << "?" << std::endl
-            << "Ans: ";
+                  << "Completion: " << s.correct + s.incorrect << " / " << s.maxNumber << " (" << (((float)s.correct + s.incorrect) / s.maxNumber) * 100 << "%)" << std::endl << std::endl
+                  << "Whats " << x[i] << " * " << y[i] << "?" << std::endl
+                  << "Ans: ";
 
         input.push_back(cmyui::getInt());
         std::cout << (input[i] == x[i] * y[i] ? "\x1B[1;32mCorrect!" : "\x1B[1;31mIncorrect!\033[0m - \x1B[1;32m" + std::to_string(x[i] * y[i])) << KRESET << std::endl;
@@ -49,7 +49,7 @@ cmyui::Score playGame(int limit) {
     s.date = time(0), s.time = s.date - s.time; // set the score's date to now.
 
     std::cout << "Walkthrough" << std::endl
-        << "=---------=" << std::endl;
+              << "=---------=" << std::endl;
     for (byte i = 0; i < s.maxNumber; i++)
         std::cout << std::setw(2) << std::left << x[i] << '*' << std::setw(2) << std::right << y[i] << " = " << std::setw(3) << (input[i] == x[i] * y[i] ? KGRN : KRED) << input[i] << KRESET << " : " << std::setw(4) << std::left << x[i] * y[i] << std::endl;
 
@@ -59,7 +59,7 @@ cmyui::Score playGame(int limit) {
 }
 
 int main() {
-    const float __version = 2.21;
+    const float __version = 2.23;
 
     std::cout.setf(std::ios::fixed);
     std::cout.precision(2);

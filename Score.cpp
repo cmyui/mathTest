@@ -15,4 +15,20 @@ namespace cmyui {
         if (hours) ret += std::to_string(hours) + "h ";
         return (ret += std::to_string(minutes) + "m " + std::to_string(seconds) + "s", ret);
     }
+
+    bool Score::operator>(Score& s) {
+        return time > s.time;
+    }
+
+    bool Score::operator<(Score& s) {
+        return time < s.time;
+    }
+
+    bool Score::operator>=(Score& s) {
+        return time >= s.time;
+    }
+
+    bool Score::operator<=(Score& s) {
+        return time <= s.time;
+    }
 }

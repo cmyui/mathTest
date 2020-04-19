@@ -8,17 +8,22 @@
 #include <iomanip>
 
 #include "Score.h"
+#include "Utils.h"
 
 #define KGRN "\x1B[1;32m"
 #define KRED "\x1B[1;31m"
 #define KYEL "\x1B[1;33m"
 #define KRESET "\033[0m"
 
+#define MAX_SCORES 0x400
+
 namespace cmyui {
     const int MAX_FILENAME = 20;
     class Leaderboard {
         char _fileName[MAX_FILENAME + 1];
-        std::vector<Score> _scores;
+        //std::vector<Score> _scores;
+        Score* _scores;
+        int _noScores;
 
         // for internal use
         void _loadScores();
@@ -29,7 +34,7 @@ namespace cmyui {
         Leaderboard(const char* fileName = "scores.db");
         ~Leaderboard() { _saveScores(); }
 
-        void addScore(Score s);
+        void addScore(Score& s);
         void display(const int maxNumber) const;
 
         void operator+=(Score s) { addScore(s); }
