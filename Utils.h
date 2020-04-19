@@ -8,6 +8,9 @@ namespace cmyui {
     int getInt();
     int getIntInRange(const int min, const int max);
     /*inline */void clearScreen();
+
+#define dealloc(x) if (x) x = (delete x, nullptr);
+#define deallocArray(x) if (x) x = (delete[] x, nullptr);
 }
 
 #endif

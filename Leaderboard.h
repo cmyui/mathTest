@@ -29,10 +29,10 @@ namespace cmyui {
         Leaderboard(const char* fileName = "scores.db");
         ~Leaderboard() { _saveScores(); }
 
-        void addScore(Score& s);
+        void addScore(Score s);
         void display(const int maxNumber) const;
 
-        void operator+=(Score& s) { addScore(s); }
+        void operator+=(Score s) { addScore(s); }
         Score& operator[](int i) { return _scores[i]; }
     };
 }

@@ -54,10 +54,11 @@ namespace cmyui {
         }
     }
 
-    void Leaderboard::addScore(Score& s) {
+    void Leaderboard::addScore(Score s) {
         if (s.correct || s.incorrect || s.maxNumber || s.date || s.time) {
             _scores.push_back(s);
             _sortScores();
+            _saveScores();
         }
     }
 
