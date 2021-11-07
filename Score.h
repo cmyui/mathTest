@@ -16,6 +16,7 @@ namespace cmyui {
             : correct(_correct), incorrect(_incorrect), maxNumber(_maxNumber), time(_time), date(_date) {}
 
         std::string getTimeFormatted(int input) const;
+        void printStats() const;
 
         bool operator>(Score& s);
         bool operator<(Score& s);

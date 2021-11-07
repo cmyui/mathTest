@@ -18,7 +18,7 @@
 #define MAX_SCORES 0x400
 
 namespace cmyui {
-    const int MAX_FILENAME = 20;
+    const static int MAX_FILENAME = 20;
     class Leaderboard {
         char _fileName[MAX_FILENAME + 1];
         //std::vector<Score> _scores;
@@ -27,7 +27,7 @@ namespace cmyui {
 
         // for internal use
         void _loadScores();
-        void _saveScores();
+        void _saveScores() const;
         inline void _sortScores();
 
     public:

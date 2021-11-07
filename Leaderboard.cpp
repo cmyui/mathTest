@@ -1,5 +1,6 @@
-#include "Leaderboard.h"
+#include <cstring>
 
+#include "Leaderboard.h"
 namespace cmyui {
     void Leaderboard::_loadScores() { // omega unsafe
         std::ifstream ifs(_fileName, std::ifstream::in);
@@ -12,7 +13,7 @@ namespace cmyui {
         if (_noScores > MAX_SCORES) {
             throw "Invalid db file! (size)";
             return exit(1);
-        } 
+        }
         ifs.ignore();
 
         _scores = new Score[_noScores];
@@ -32,7 +33,7 @@ namespace cmyui {
         ifs.close();
 	}
 
-    void Leaderboard::_saveScores() {
+    void Leaderboard::_saveScores() const {
         std::ofstream ofs(_fileName, std::ofstream::out | std::ios::trunc);
         if (!ofs.good()) {
             ofs.close();
@@ -47,7 +48,9 @@ namespace cmyui {
         ofs.close();
     }
 
-    inline void Leaderboard::_sortScores() { cmyui::bubbleSort<Score>(_scores, _noScores); }
+    inline void Leaderboard::_sortScores() {
+        cmyui::bubbleSort<Score>(_scores, _noScores);
+    }
 
     Leaderboard::Leaderboard(const char* fileName) {
         if (!fileName || !*fileName)
@@ -62,13 +65,26 @@ namespace cmyui {
     void Leaderboard::addScore(Score& s) { // can go over MAX_SCORES, but won't save anything past it.
         if (s.correct || s.incorrect || s.maxNumber || s.date || s.time) {
             if (_noScores) {
+                // create temp, move from old to temp
                 Score* tmp = new Score[_noScores];
-                for (int i = 0; i < _noScores; tmp[i] = _scores[i], i++);// old->tmp
-                deallocArray(_scores);// del old
+                for (int i = 0; i < _noScores; i++)
+                    tmp[i] = _scores[i];
+
+                // delete old
+                deallocArray(_scores);
+
+                // create new, move from temp to old
                 _scores = new Score[_noScores + 1];// new old
-                for (int i = 0; i < _noScores; _scores[i] = tmp[i], i++);// tmp->old
-            } else _scores = new Score[_noScores + 1];
+                for (int i = 0; i < _noScores; i++)// tmp->old
+                    _scores[i] = tmp[i];
+            } else {
+                _scores = new Score[_noScores + 1];
+            }
+
+            // add new score
             _scores[_noScores++] = s;
+
+            // sort & resave to disk
             _sortScores();
             _saveScores();
         }

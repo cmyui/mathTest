@@ -16,7 +16,7 @@ namespace cmyui {
 
 	void Menu::display() {
 		std::cout << _name << std::endl;
-		for (int i = 0; i < _items.size(); i++)
+		for (size_t i = 0; i < _items.size(); i++)
 			std::cout << i + 1 << ". " << _items[i] << std::endl;
 		std::cout << "0. Exit" << std::endl;
 	}

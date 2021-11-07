@@ -8,7 +8,7 @@ namespace cmyui {
     ::std::vector<int> generateTable(int limit);
     int getInt();
     int getIntInRange(const int min, const int max);
-    /*inline */void clearScreen();
+    void clearScreen();
 
     template<typename T>
     void bubbleSort(T arr[], int n) {
